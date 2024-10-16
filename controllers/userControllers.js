@@ -31,7 +31,7 @@ export function loginUsers(req,res){
 
     User.findOne({email: credentials.email}).then(
         (user)=>{
-            if(user == null){
+            if(!user){
                 res.status(403).json({
                     message: "User not found"
                 })
