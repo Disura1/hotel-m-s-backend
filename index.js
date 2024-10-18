@@ -4,17 +4,19 @@ import mongoose from "mongoose"
 import userRouter from "./routers/userRouter.js"
 import galleryItemRouter from "./routers/galleryItemRouter.js"
 import jwt from "jsonwebtoken"
+import dotenv from "dotenv"
+dotenv.config()
 
 const app = express()
 
 app.use(bodyParser.json())
 
-const connectionString = "mongodb+srv://Disura_Sandaruwan:dis2002hotelms@cluster0.jrwhs.mongodb.net/"
+const connectionString = process.env.MONGO_URL
 
 app.use((req, res, next)=>{          //Authentication middleware
     const token = req.header("Authorization")?.replace("Bearer ","")
     if(token != null){
-        jwt.verify(token,"secret",(err,decoded)=>{
+        jwt.verify(token,process.env.JWT_KEY,(err,decoded)=>{
             if(decoded != null){
                 req.user = decoded
                 next()
