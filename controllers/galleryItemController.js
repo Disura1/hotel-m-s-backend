@@ -1,9 +1,10 @@
 import GalleryItem from "../models/galleryItem.js"
 
-export function createGalleryItem(req, res){
+//-------------------------Add new Gallery item------------------------------
+export function createGalleryItem(req, res){   
    
-    const user = req.user
-    if(user == null){
+    const user = req.user                           //Check the Access
+    if(!user){
         res.status(403).json({
             message: "Please login to create Gallery Item"
         })
@@ -16,7 +17,7 @@ export function createGalleryItem(req, res){
         return
     }
 
-    const galleryItem = req.body
+    const galleryItem = req.body                    //Create new Gallery item
     const newGalleryItem = new GalleryItem(galleryItem)
     newGalleryItem.save().then(
         ()=>{
@@ -33,7 +34,8 @@ export function createGalleryItem(req, res){
     )
 }
 
-export function getGalleryItems(req,res){
+//-----------------------Show all gallery itmes in front end------------------------
+export function getGalleryItems(req,res){           
     GalleryItem.find().then(
         (list)=>{
             res.json({

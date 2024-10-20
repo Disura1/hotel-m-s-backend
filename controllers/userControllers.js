@@ -4,7 +4,8 @@ import bcrypt from "bcrypt"
 import dotenv from "dotenv"
 dotenv.config()
 
-export function postUsers(req,res){
+//---------------------------Sign Up Function--------------------------
+export function postUsers(req,res){            
     const user = req.body;
 
     const password = req.body.password;       //Password hashing
@@ -28,7 +29,8 @@ export function postUsers(req,res){
     )
 }
 
-export function loginUsers(req,res){
+//--------------------------------Sign In Function--------------------------------
+export function loginUsers(req,res){          
     const credentials = req.body
 
     User.findOne({email: credentials.email}).then(
