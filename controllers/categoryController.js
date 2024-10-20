@@ -61,3 +61,20 @@ export function deleteCategory(req, res){
         }
     )
 }
+
+//---------------------------Show All Categories------------------------------
+export function getCategory(req, res){
+    Category.find().then(
+        (result)=>{
+            res.json({
+                categories: result
+            })
+        }
+    ).catch(
+        ()=>{
+            res.json({
+                message: "Failed to get Categories"
+            })
+        }
+    )
+}
