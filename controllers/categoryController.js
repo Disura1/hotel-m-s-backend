@@ -1,4 +1,5 @@
 import Category from "../models/category.js";
+import { isAdminValid } from "./userControllers.js";
 
 //----------------------------Add new Category-------------------------
 export function createCategory(req, res){
