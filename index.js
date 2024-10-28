@@ -7,6 +7,7 @@ import jwt from "jsonwebtoken"
 import dotenv from "dotenv"
 import categoryRouter from "./routers/categoryRouter.js"
 import roomRouter from "./routers/roomRouter.js"
+import bookingRouter from "./routers/bookingRouter.js"
 dotenv.config()
 
 const app = express()
@@ -45,6 +46,7 @@ app.use("/api/users", userRouter)
 app.use("/api/gallery", galleryItemRouter)
 app.use("/api/category", categoryRouter)
 app.use("/api/room", roomRouter)
+app.use("/api/booking", bookingRouter)
 
 app.listen(5000,(req,res)=>{
     console.log("Server is running on port 5000")

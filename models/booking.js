@@ -15,7 +15,7 @@ const bookingSchema = new mongoose.Schema({
         required: true
     },
     status: {
-        Type: String,
+        type: String,
         required: true,
         default: "Pending"
     },
@@ -34,6 +34,10 @@ const bookingSchema = new mongoose.Schema({
     notes: {
         type: String,
         default: ""
+    },
+    timeStamp: {
+        type: Date,
+        default: Date.now
     }
 })
 
