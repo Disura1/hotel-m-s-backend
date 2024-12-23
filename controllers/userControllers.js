@@ -81,10 +81,10 @@ export function isAdminValid(req){
 
 //-------------------------Customer checking-----------------------------
 export function isCustomerValid(req){
-    if(req.user == null){
+    if(req.body.user == null){
         return false
     }
-    if(req.user.type != "Customer"){
+    if(req.body.user.type != "Customer"){
         return false
     }
     return true
