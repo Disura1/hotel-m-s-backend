@@ -122,7 +122,9 @@ export async function createBookingUsingCategory(req, res) {
 		// Find bookings that overlap with the given dates
 		const overlappingBookings = await Booking.find({
 			$or: [
-				{ start: { $lt: endDate }, end: { $gt: startDate } }, // Full or partial overlap
+				{ start: { $lt: endDate }, 
+        end: { $gt: startDate } 
+      }, // Full or partial overlap
 			],
 		});
 

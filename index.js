@@ -9,6 +9,7 @@ import categoryRouter from "./routers/categoryRouter.js"
 import roomRouter from "./routers/roomRouter.js"
 import bookingRouter from "./routers/bookingRouter.js"
 import cors from "cors"
+import feedbackRouter from "./routers/feedbackRouter.js"
 dotenv.config()
 
 const app = express()
@@ -50,6 +51,7 @@ app.use("/api/gallery", galleryItemRouter)
 app.use("/api/category", categoryRouter)
 app.use("/api/room", roomRouter)
 app.use("/api/booking", bookingRouter)
+app.use("/api/feedbacks", feedbackRouter)
 
 app.listen(5000,(req,res)=>{
     console.log("Server is running on port 5000")

@@ -9,8 +9,8 @@ export function postUsers(req,res){
     const user = req.body;
 
     const password = req.body.password;       //Password hashing
-    const saltRounds = 10;
-    const passwordHash = bcrypt.hashSync(password, saltRounds);
+    const salt = bcrypt.genSaltSync(10)
+    const passwordHash = bcrypt.hashSync(password, salt);
     user.password = passwordHash
 
     const newUser = new User(user)
@@ -102,4 +102,78 @@ export function getUser(req, res){
             user: user
         })
     }
+}
+
+//----------------------Show All Users------------------------
+export function getUsers(req, res){
+    User.find().then(
+        (result)=>{
+            res.json({
+                users: result
+            })
+        }
+    ).catch(
+        ()=>{
+            res.json({
+                message: "Failed to get Users"
+            })
+        }
+    )
+}
+
+//-------------------Update User-----------------------
+export function updateUser(req,res){
+    if(!isAdminValid(req)){
+        res.status(403).json({
+            message: "Forbidden"
+        })
+        return
+    }
+
+    const email = req.params.email
+    User.findOneAndUpdate({
+        email: email
+    },req.body).then(
+        ()=>{
+            res.json({
+                message: "User updated successfully"
+            })
+        }
+    ).catch(
+        ()=>{
+            res.json({
+                message: "User update failed"
+            })
+        }
+    )
+}
+
+//------------------------------Delete Category--------------------------------
+export function deleteUser(req, res){
+    if(req.body.user == null){
+        res.status(401).json({
+            message: "Unauthorized"
+        })
+        return
+    }
+    if(req.body.user.type != "Admin"){
+        res.status(403).json({
+            message: "Forbidden"
+        })
+        return
+    }
+    const email = req.params.email
+    User.findOneAndDelete({email: email}).then(
+        ()=>{
+            res.json({
+                message: "User Deleted Successfully"
+            })
+        }
+    ).catch(
+        ()=>{
+            res.json({
+                message: "User Deletion Failed"
+            })
+        }
+    )
 }
