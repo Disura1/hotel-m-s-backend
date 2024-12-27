@@ -3,13 +3,13 @@ import { isAdminValid } from "./userControllers.js";
 
 //----------------------------Add new Category-------------------------
 export function createCategory(req, res){
-    if(req.user == null){
+    if(req.body.user == null){
         res.status(401).json({
             message: "Unauthorized"
         })
         return
     }
-    if(req.user.type != "Admin"){
+    if(req.body.user.type != "Admin"){
         res.status(403).json({
             message: "Forbidden"
         })
@@ -35,13 +35,13 @@ export function createCategory(req, res){
 
 //------------------------------Delete Category--------------------------------
 export function deleteCategory(req, res){
-    if(req.user == null){
+    if(req.body.user == null){
         res.status(401).json({
             message: "Unauthorized"
         })
         return
     }
-    if(req.user.type != "Admin"){
+    if(req.body.user.type != "Admin"){
         res.status(403).json({
             message: "Forbidden"
         })

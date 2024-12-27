@@ -8,9 +8,12 @@ import dotenv from "dotenv"
 import categoryRouter from "./routers/categoryRouter.js"
 import roomRouter from "./routers/roomRouter.js"
 import bookingRouter from "./routers/bookingRouter.js"
+import cors from "cors"
 dotenv.config()
 
 const app = express()
+
+app.use(cors())
 
 app.use(bodyParser.json())
 
@@ -21,7 +24,7 @@ app.use((req, res, next)=>{          //Authentication middleware
     if(token != null){
         jwt.verify(token,process.env.JWT_KEY,(err,decoded)=>{
             if(decoded != null){
-                req.user = decoded
+                req.body.user = decoded
                 next()
             }else{
                 next()

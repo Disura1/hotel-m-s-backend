@@ -70,10 +70,10 @@ export function loginUsers(req,res){
 
 //--------------------------Admin checking------------------------------
 export function isAdminValid(req){
-    if(req.user == null){
+    if(req.body.user == null){
         return false
     }
-    if(req.user.type != "Admin"){
+    if(req.body.user.type != "Admin"){
         return false
     }
     return true
@@ -81,11 +81,25 @@ export function isAdminValid(req){
 
 //-------------------------Customer checking-----------------------------
 export function isCustomerValid(req){
-    if(req.user == null){
+    if(req.body.user == null){
         return false
     }
-    if(req.user.type != "Customer"){
+    if(req.body.user.type != "Customer"){
         return false
     }
     return true
+}
+
+export function getUser(req, res){
+    const user = req.body.user
+    if(user == null){
+        res.json({
+            message: "not found"
+        })
+    }else{
+        res.json({
+            message: "found",
+            user: user
+        })
+    }
 }
