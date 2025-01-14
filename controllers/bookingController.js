@@ -1,4 +1,5 @@
 import Booking from "../models/booking.js";
+import Room from "../models/room.js";
 import { isCustomerValid } from "./userControllers.js";
 
 //-------------------New Booking Function--------------------
